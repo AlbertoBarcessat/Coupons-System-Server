@@ -1,0 +1,10 @@
+coupons.CouponsSystemWeb
+coupons.CouponsSystemWeb.customValidations
+coupons.CouponsSystemWeb.entities
+coupons.CouponsSystemWeb.exceptions
+coupons.CouponsSystemWeb.filters
+coupons.CouponsSystemWeb.repositories
+coupons.CouponsSystemWeb.services
+coupons.CouponsSystemWeb.tasks
+coupons.CouponsSystemWeb.tests
+coupons.CouponsSystemWeb.webservices
