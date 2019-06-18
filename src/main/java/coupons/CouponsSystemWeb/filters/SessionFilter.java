@@ -12,10 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import coupons.CouponsSystemWeb.entities.ClientType;
 
 @WebFilter("/rest/*")
 public class SessionFilter implements Filter {
+	
+	@Autowired
+	Logger logger;
 
 	/**
 	 * Filters all user HTTP requests by checking that: 1. session is not expired,
@@ -36,7 +42,7 @@ public class SessionFilter implements Filter {
 						"Please login in order to continue");
 				return;
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				logger.error(e.getMessage());
 			}
 		}
 
@@ -50,7 +56,7 @@ public class SessionFilter implements Filter {
 						"Please login before entering the system");
 				return;
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				logger.error(e.getMessage());
 			}
 		}
 
