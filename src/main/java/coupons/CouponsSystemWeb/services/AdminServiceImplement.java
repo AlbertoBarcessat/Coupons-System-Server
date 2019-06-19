@@ -17,6 +17,7 @@ import coupons.CouponsSystemWeb.entities.ClientType;
 import coupons.CouponsSystemWeb.entities.Company;
 import coupons.CouponsSystemWeb.entities.Coupon;
 import coupons.CouponsSystemWeb.entities.Customer;
+import coupons.CouponsSystemWeb.exceptions.InvalidIdException;
 import coupons.CouponsSystemWeb.exceptions.InvalidLoginException;
 import coupons.CouponsSystemWeb.exceptions.UniqueValueException;
 import coupons.CouponsSystemWeb.exceptions.ValueNotFoundException;
@@ -117,10 +118,15 @@ public class AdminServiceImplement implements AdminService {
 	 * Updates a company - password and email only
 	 * 
 	 * @param company Company including values to be updated
+	 * @param companyId Id of company to update
 	 * @throws ValueNotFoundException When company to be updated is not found
+	 * @throws InvalidIdException When trying to update data with an Id in path different from object Id
 	 */
 	@Override
-	public void updateCompany(Company company) throws ValueNotFoundException {
+	public void updateCompany(Company company, long companyId) throws ValueNotFoundException, InvalidIdException {
+		if (company.getCompanyId() != companyId) {
+			throw new InvalidIdException("Ambiguous identification of company to update");
+		}
 		try {
 			Company existingCompany = companyRep.findById(company.getCompanyId()).get();
 			existingCompany.setPassword(company.getPassword());
@@ -205,10 +211,15 @@ public class AdminServiceImplement implements AdminService {
 	 * Updates a customer - password only
 	 * 
 	 * @param customer Customer including values to be updated
+	 * @param customerId Id of customer to update
 	 * @throws ValueNotFoundException When customer to be removed is not found
+	 * @throws InvalidIdException When trying to update data with an Id in path different from object Id
 	 */
 	@Override
-	public void updateCustomer(Customer customer) throws ValueNotFoundException {
+	public void updateCustomer(Customer customer, long customerId) throws ValueNotFoundException, InvalidIdException {
+		if (customer.getCustomerId() != customerId) {
+			throw new InvalidIdException("Ambiguous identification of customer to update");
+		}
 		try {
 			Customer existingCustomer = customerRep.findById(customer.getCustomerId()).get();
 			existingCustomer.setPassword(customer.getPassword());

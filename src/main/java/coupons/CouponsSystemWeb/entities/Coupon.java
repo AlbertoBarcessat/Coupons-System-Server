@@ -62,7 +62,7 @@ public class Coupon {
 	@Column(nullable = false)
 	private Date endDate;
 
-	@PositiveOrZero(message = "Amount must be positive")
+	@PositiveOrZero(message = "Amount must be positive or zero")
 	@Column(nullable = false)
 	private int amount;
 

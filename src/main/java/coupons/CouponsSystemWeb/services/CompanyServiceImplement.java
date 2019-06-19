@@ -18,6 +18,7 @@ import coupons.CouponsSystemWeb.entities.CouponType;
 import coupons.CouponsSystemWeb.entities.Customer;
 import coupons.CouponsSystemWeb.exceptions.InvalidAmountException;
 import coupons.CouponsSystemWeb.exceptions.InvalidDateException;
+import coupons.CouponsSystemWeb.exceptions.InvalidIdException;
 import coupons.CouponsSystemWeb.exceptions.InvalidLoginException;
 import coupons.CouponsSystemWeb.exceptions.UnauthorizedException;
 import coupons.CouponsSystemWeb.exceptions.UniqueValueException;
@@ -147,13 +148,18 @@ public class CompanyServiceImplement implements CompanyService {
 	 * not passed and with positive price
 	 * 
 	 * @param coupon Coupon including values to be updated
+	 * @param couponId Id of coupon to update
 	 * @param userId Id of user who is logged in
 	 * @throws UniqueValueException  When there is a coupon in system with same
 	 *                               title
 	 * @throws UnauthorizedException When company is not owner of coupon
+	 * @throws InvalidIdException  When trying to update data with an Id in path different from object Id
 	 */
 	@Override
-	public void updateCoupon(Coupon coupon, long userId) throws UniqueValueException, UnauthorizedException {
+	public void updateCoupon(Coupon coupon, long couponId, long userId) throws UniqueValueException, UnauthorizedException, InvalidIdException {
+		if (coupon.getCouponId() != couponId) {
+			throw new InvalidIdException("Ambiguous identification of coupon to update");
+		}
 		try {
 			Coupon existingCoupon = couponRep.findById(coupon.getCouponId()).get();
 			if (existingCoupon.getCompany().getCompanyId() == userId) {

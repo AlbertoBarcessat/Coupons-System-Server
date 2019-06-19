@@ -71,8 +71,7 @@ public class CompanyController {
 	@PutMapping(path = "coupon/{couponId}")
 	public void updateCoupon(@PathVariable long couponId, @RequestBody Coupon coupon, HttpSession session)
 			throws CouponsSystemException {
-		coupon.setCouponId(couponId);
-		companyService.updateCoupon(coupon, sharedController.getUserId(session));
+		companyService.updateCoupon(coupon, couponId, sharedController.getUserId(session));
 	}
 
 	/**

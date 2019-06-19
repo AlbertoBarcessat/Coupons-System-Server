@@ -14,6 +14,7 @@ import coupons.CouponsSystemWeb.entities.Coupon;
 import coupons.CouponsSystemWeb.entities.CouponType;
 import coupons.CouponsSystemWeb.exceptions.InvalidAmountException;
 import coupons.CouponsSystemWeb.exceptions.InvalidDateException;
+import coupons.CouponsSystemWeb.exceptions.InvalidIdException;
 import coupons.CouponsSystemWeb.exceptions.InvalidLoginException;
 import coupons.CouponsSystemWeb.exceptions.UnauthorizedException;
 import coupons.CouponsSystemWeb.exceptions.UniqueValueException;
@@ -36,8 +37,8 @@ public interface CompanyService {
 	public void removeCoupon(@Positive long couponId, @Positive long userId)
 			throws ValueNotFoundException, UnauthorizedException;
 
-	public void updateCoupon(@Valid Coupon coupon, @Positive long userId)
-			throws UniqueValueException, UnauthorizedException;
+	public void updateCoupon(@Valid Coupon coupon, @Positive long couponId, @Positive long userId)
+			throws UniqueValueException, UnauthorizedException, InvalidIdException;
 
 	public Company getCompany(@Positive long userId) throws ValueNotFoundException;
 

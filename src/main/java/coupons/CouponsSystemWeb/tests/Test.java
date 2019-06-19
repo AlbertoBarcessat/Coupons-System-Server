@@ -146,7 +146,7 @@ public class Test {
 		if (comp != null) {
 			try {
 				comp.setEmail("555@org.il");
-				adminService.updateCompany(comp);
+				adminService.updateCompany(comp, comp.getCompanyId());
 				logger.debug(adminService.getCompany(comp.getCompanyId()).toString());
 			} catch (ConstraintViolationException | CouponsSystemException e) {
 				logger.debug(e.getMessage());
@@ -186,7 +186,7 @@ public class Test {
 		comp = companies.get(0);
 		comp.setEmail("aaa.co.il");
 		try {
-			adminService.updateCompany(comp);
+			adminService.updateCompany(comp, comp.getCompanyId());
 		} catch (ConstraintViolationException | CouponsSystemException e) {
 			logger.debug(e.getMessage());
 		}
@@ -227,7 +227,7 @@ public class Test {
 		if (cust != null) {
 			try {
 				cust.setPassword("111111");
-				adminService.updateCustomer(cust);
+				adminService.updateCustomer(cust, cust.getCustomerId());
 				logger.debug(adminService.getCustomer(cust.getCustomerId()).toString());
 			} catch (ConstraintViolationException | CouponsSystemException e) {
 				logger.debug(e.getMessage());
@@ -315,7 +315,7 @@ public class Test {
 		logger.debug("\nUpdate coupons test - update price to 40 NIS");
 		coupons.get(0).setPrice(40);
 		try {
-			companyService.updateCoupon(coupons.get(0), companyId);
+			companyService.updateCoupon(coupons.get(0), coupons.get(0).getCouponId(), companyId);
 		} catch (CouponsSystemException e) {
 			logger.debug(e.getMessage());
 		}
@@ -398,7 +398,7 @@ public class Test {
 			logger.debug(e.getMessage());
 		}
 		try {
-			companyService.updateCoupon(coupon, companyId);
+			companyService.updateCoupon(coupon, coupon.getCouponId(), companyId);
 		} catch (ConstraintViolationException | CouponsSystemException e) {
 			logger.debug(e.getMessage());
 		}
@@ -408,7 +408,7 @@ public class Test {
 		// return date to valid value
 		coupon.setPrice(-6);
 		try {
-			companyService.updateCoupon(coupon, companyId);
+			companyService.updateCoupon(coupon, coupon.getCouponId(), companyId);
 		} catch (ConstraintViolationException | CouponsSystemException e) {
 			logger.debug(e.getMessage());
 		}

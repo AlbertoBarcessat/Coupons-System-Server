@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import coupons.CouponsSystemWeb.entities.ClientType;
 import coupons.CouponsSystemWeb.entities.Company;
 import coupons.CouponsSystemWeb.entities.Customer;
+import coupons.CouponsSystemWeb.exceptions.InvalidIdException;
 import coupons.CouponsSystemWeb.exceptions.InvalidLoginException;
 import coupons.CouponsSystemWeb.exceptions.UniqueValueException;
 import coupons.CouponsSystemWeb.exceptions.ValueNotFoundException;
@@ -30,7 +31,7 @@ public interface AdminService {
 
 	public void removeCompany(@Positive long companyId) throws ValueNotFoundException;
 
-	public void updateCompany(@Valid Company company) throws ValueNotFoundException;
+	public void updateCompany(@Valid Company company, @Positive long companyId) throws ValueNotFoundException, InvalidIdException;
 
 	public List<Company> getAllCompanies();
 
@@ -40,7 +41,7 @@ public interface AdminService {
 
 	public void removeCustomer(@Positive long customerId) throws ValueNotFoundException;
 
-	public void updateCustomer(@Valid Customer customer) throws ValueNotFoundException;
+	public void updateCustomer(@Valid Customer customer, @Positive long customerId) throws ValueNotFoundException, InvalidIdException;
 
 	public List<Customer> getAllCustomers();
 

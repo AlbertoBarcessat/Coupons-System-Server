@@ -62,8 +62,7 @@ public class AdminController {
 	@PutMapping(path = "company/{companyId}")
 	public void updateCompany(@PathVariable long companyId, @RequestBody Company company)
 			throws CouponsSystemException {
-		company.setCompanyId(companyId);
-		adminService.updateCompany(company);
+		adminService.updateCompany(company, companyId);
 	}
 
 	/**
@@ -121,8 +120,7 @@ public class AdminController {
 	@PutMapping(path = "customer/{customerId}")
 	public void updateCustomer(@PathVariable long customerId, @RequestBody Customer customer)
 			throws CouponsSystemException {
-		customer.setCustomerId(customerId);
-		adminService.updateCustomer(customer);
+		adminService.updateCustomer(customer, customerId);
 	}
 
 	/**
